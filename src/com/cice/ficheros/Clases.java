@@ -37,7 +37,8 @@ public class Clases {
     //ObjectOutputStream: Permite enviar un objeto a un flujo de salida, incluido ficheros.
 
     public void lecturaFichero() {
-        file = new File("D:\\ALI\\CICE\\Aplicaciones\\006_T119_Ficheros\\ficheros\\filereader.txt");
+        //file = new File("D:\\ALI\\CICE\\Aplicaciones\\006_T119_Ficheros\\ficheros\\filereader.txt");
+        file = new File("fichero.txt");
         try {
             fileReader = new FileReader(file);
             bf = new BufferedReader(fileReader);
@@ -94,11 +95,61 @@ public class Clases {
             }
         }
     }
+
+    public void escrituraFicheroFileWriter() throws IOException {
+        //FileWriter(String fichero, boolean append)
+        // append true: añadirán caracteres al final
+        // append false: sobreescribirán a los anteriores
+
+        File fichero = new File("fichero.txt");
+        try (FileWriter creador = new FileWriter(fichero,true)) {
+//objeto para crear el fichero en el disco
+                        creador.write("Hola caracola ");
+        } catch (IOException ex) {
+            Logger.getLogger(Clases.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*      FileWriter creador = null;
+        try {
+            //objeto para crear el fichero en el disco
+            creador = new FileWriter(fichero,true);
+            creador.write("Hola caracola ");
+        } catch (IOException ex) {
+            Logger.getLogger(Clases.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (creador != null) {
+                creador.close();
+            }
+        }*/
+
+    }
     
-    public void escrituraFicheroFileWriter(){
-    //FileWriter(String fichero, boolean append)
-    // append true: añadirán caracteres al final
-    // append false: sobreescribirán a los anteriores
+    public void leoescribo() {
+        
+        File f = new File("fichero.txt");
+        FileReader fr;
+        try {
+            fr = new FileReader(f);
+            BufferedReader bf = new BufferedReader(fr);
+            String cadena;
+            
+            StringBuilder sb = new StringBuilder();
+            while((cadena=bf.readLine())!=null) {
+                sb.append(cadena);
+            }
+            sb.append("\n");
+            sb.append(" add");
+            FileWriter fw = new FileWriter(f);
+            fw.write(sb.toString());
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Clases.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Clases.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    
     
     }
 }
